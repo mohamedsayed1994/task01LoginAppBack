@@ -15,7 +15,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping(value = "/api/auth")
-//@CrossOrigin("http://localhost:4201")
+@CrossOrigin({"http://localhost:4201", "http://localhost:4201/appLogin"})
 public class AuthController {
     @Autowired
     private TokenUtile tokenUtils;
@@ -27,6 +27,7 @@ public class AuthController {
     @PostMapping(value = {"", "/singIn"})
     public JwtResponse singIn(@RequestParam String username, @RequestParam String password) throws Exception {
         System.out.println("===========> start authentication controller");
+        System.out.println("username " + username + " decryptedPass: " + password);
         Authentication authentication = null;
         try {
             authentication = authenticationManager

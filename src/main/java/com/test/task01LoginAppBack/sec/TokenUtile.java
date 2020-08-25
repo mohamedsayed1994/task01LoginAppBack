@@ -18,6 +18,7 @@ public class TokenUtile {
     public String generateToken(UserDetails userDetails) {
         Map<String, Object> claim = new HashMap<>();
         claim.put("sub", userDetails.getUsername());
+        claim.put("testParam", "testVal");
         claim.put("created", new Date());
         return Jwts.builder().setClaims(claim).setExpiration(getExpirationDate())
                 .signWith(SignatureAlgorithm.HS512, TOKEN_SECRET).compact();

@@ -9,7 +9,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api")
-@CrossOrigin("http://localhost:4201")
+@CrossOrigin({"http://localhost:4201", "http://localhost:4201/appLogin"})
 public class UserController {
     private final UserService userService;
 
@@ -20,12 +20,7 @@ public class UserController {
 
     @GetMapping("/login")
     public User loginData(@RequestParam String username,
-                          @RequestParam String password) {
-        //7061737323313233
-//        String decryptedUser = Encryption.decrypt(username, "7061737323313233");
-//        System.out.println(decryptedUser);
-//        String decryptedPass = Encryption.decrypt(password, "7061737323313233");
-//        System.out.println(decryptedPass);
+                          @RequestParam String password) throws Exception {
 
         return this.userService.checkUser(username, password);
     }

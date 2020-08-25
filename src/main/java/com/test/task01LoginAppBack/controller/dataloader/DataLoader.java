@@ -21,13 +21,13 @@ public class DataLoader implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        User user1 = new User("aly", "aly");
+        User user1 = new User("aly", "aly123");
         this.userService.create(user1);
-        SecUser user2 = new SecUser("mohamed", "111", true, "USER_ROLE");
+        SecUser user2 = new SecUser("mohamed", "123456", true, "USER_ROLE");
         this.secUserService.addUser(user2);
-        SecUser user3 = new SecUser("omar", "222", true, "USER_ROLE");
+        SecUser user3 = new SecUser("omar", "omar_123", true, "USER_ROLE");
         this.secUserService.addUser(user3);
-        SecUser user = new SecUser("admin", "admin", true, "ADMIN_ROLE , USER_ROLE");
+        SecUser user = new SecUser("admin", "admin123", true, "ADMIN_ROLE , USER_ROLE");
         this.secUserService.addUser(user);
     }
 }
