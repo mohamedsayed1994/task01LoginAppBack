@@ -1,5 +1,7 @@
 package com.test.task01LoginAppBack.sec;
 
+import com.test.task01LoginAppBack.RsaEncryption.RSAEncryptionManager;
+import com.test.task01LoginAppBack.model.UserTest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -25,9 +27,16 @@ public class AuthController {
     private AuthenticationManager authenticationManager;
 
     @PostMapping(value = {"", "/singIn"})
-    public JwtResponse singIn(@RequestParam String username, @RequestParam String password) throws Exception {
+//    public JwtResponse singIn(@RequestParam String username, @RequestParam String password) throws Exception {
+//    public JwtResponse singIn(@RequestBody String usernameEncrypt, @RequestBody String passwordEncrypt) throws Exception {
+    public JwtResponse singIn(@RequestBody UserTest userEncrypt) throws Exception {
         System.out.println("===========> start authentication controller");
-        System.out.println("username " + username + " decryptedPass: " + password);
+        String username = RSAEncryptionManager.decrypt(userEncrypt.getUsername());
+        String password = RSAEncryptionManager.decrypt(userEncrypt.getPassword());
+        System.out.println("username-Encrypt: " + userEncrypt.getUsername());
+        System.out.println("Pass-Encrypt: " + userEncrypt.getPassword());
+        System.out.println("username: " + username + " decryptedPass: " + password);
+
         Authentication authentication = null;
         try {
             authentication = authenticationManager
